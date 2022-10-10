@@ -25,7 +25,7 @@ def get_water_between_boundaries(bricks_array):
     return potential_water_amount - obstacles
 
 
-def how_much_water2(bricks_array):
+def how_much_water(bricks_array):
     """ Compute the number of water bricks in an arbitrary array
 
     The basic idea is that we find the positions of the two largest columns and determine the amount of water inside
@@ -33,6 +33,9 @@ def how_much_water2(bricks_array):
 
     Afterwards we replace the entire sub-array by its right boundary since we know that it must be bigger or equal to
     any other brick in the array.
+
+    We continue doing so until the array is shorter than 3 columns because in that situation it can no longer store
+    any water.
 
     Parameters
     ----------
@@ -45,9 +48,7 @@ def how_much_water2(bricks_array):
 
     total_water_amount = 0
 
-    while True:
-        if len(bricks_array) < 3:
-            break
+    while len(bricks_array) > 2:
 
         temp = bricks_array.copy()
         temp.sort(reverse=True)
@@ -69,19 +70,6 @@ def how_much_water2(bricks_array):
         del bricks_array[left_boundary:right_boundary]
 
     return total_water_amount
-
-
-def how_much_water(bricks_array: list) -> int:
-    water = 0
-    heightmax = 0
-    for i in range(len(bricks_array)):
-        if(heightmax < bricks_array[i]):
-            heightmax = bricks_array[i]
-        else:
-            nextmax = max(bricks_array[i:])
-            if(nextmax > bricks_array[i]):
-                water += min(nextmax, heightmax)-bricks_array[i]
-    return water
 
 
 if __name__ == '__main__':

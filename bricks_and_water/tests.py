@@ -7,7 +7,6 @@ def test_borders_highest_and_same_heigt(input, expected_outcome):
 
     assert outcome == expected_outcome
 
-
 @pytest.mark.parametrize("input, expected_outcome", [([1,0,2,1], 1), ([3,0,6,1,0,3], 8)])
 def test_higher_blocks_inside(input, expected_outcome):
     outcome = how_much_water(input)
